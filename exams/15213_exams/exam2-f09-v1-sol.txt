@@ -1,0 +1,93 @@
+Exam 2, Version 1 
+Solutions
+15-213/18-243 Fall 2009
+
+*********
+Problem 1
+*********
+
+1. d
+2. b
+3. a
+4. c
+5. d
+6. b
+7. b
+
+*********
+Problem 2
+*********
+
+Trick!
+
+stack_addr > heap_addr
+
+*********
+Problem 3
+*********
+
+1. abc
+2. nyzxid
+3. clr
+
+
+*********
+Problem 4
+*********
+1.
++-------------------------------------+
+|         Ret Addr to Main            |
++-------------------------------------+
+|         main's ebp                  |  Stack Growing Down! |
++-------------------------------------+			     V        
+|	  100-byte password	      |
++-------------------------------------+
+|	  &passward                   |
++-------------------------------------+
+|	  ret addr to exploitme       |
++-------------------------------------+
+|	  exploitme ebp               |
+
+2.
+overflow password to overwrite the return address exploitme to be any arbitray code. This code can return true from exploitme.
+
+3.
+|         expliotme ebp		      |
++-------------------------------------+
+|         Return Address to Expliotme |
++-------------------------------------+
+|         &password                   |
++-------------------------------------+
+|         100 byte password           |                    ^
++-------------------------------------+
+|         main ebp                    |  Stack Growing UP! |
++-------------------------------------+
+|         Ret Addr to Main            |
++-------------------------------------+
+
+
+4. He is wrong, you can overwrite the return address of expolitme to jump to arbitray code. This code can return true.
+
+*********
+Problem 5
+*********
+
+A. 112240
+   121240
+   122140
+
+B. 18
+   21 - double count when 2 0s at the end.
+
+*********
+Problem 6
+*********
+
+1. 1002 with 1 (init) as parent
+2. sonner, because shell returns when 1001 exits
+3. 1002 never comes to exit, but 1001 still exits with same status.
+4. disassociate 1002 from the terminal.
+5. any server/daeman
+6. - open a log file and dup2 stderr/stdout to it
+   - drop permission
+   - grab a lock file in /var/run (the first answer is what we expect, but all are valid.

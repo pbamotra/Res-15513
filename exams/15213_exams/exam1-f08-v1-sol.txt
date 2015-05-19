@@ -1,0 +1,119 @@
+Exam 1, Version 1 (day listed as "Thurs.").
+Solutions
+CS 213 Fall 2008
+
+*********
+Problem 1
+********
+
+ Expression   Decimal     Binary
+-----------------------------------
+---        |   -17     | 1110 1111
+---        |    41     | 0010 1001
+sa         |    -6     |      1010
+b          |   -12     | 1111 0100
+sc         |     4     |      0100
+ux         |   192     | 1100 0000
+TMax       |   127     | 0111 1111
+TMax-TMin  |    -1     | 1111 1111
+-----------------------------------
+
+*********
+Problem 2
+********
+
+A. True.   It yields i when i < 0, and ~i when i >= 0
+B. False.  For 0 and TMin
+C. False.  For large values of i, e.g., TMax, the addition can overflow
+D. True.   Will use floating point arithmetic, which does not overflow
+E. False.  Converting i to floating point can cause rounding.  E.g., for TMax
+
+
+*********
+Problem 3
+********
+
+ 110 11100 | 15    | 10010 111 | 15
+ 100 10101 | 53/16 | 10000 101 | 13/4
+ 111 00000 | +Inf  | 10100 110 | 56
+ 000 00001 | 1/128 | 01000 000 | 1/128
+
+
+*********
+Problem 4
+********
+
+Blanks should be filled in as:
+
+  int **
+  i < n
+  j <= i
+  M[i][j] > 0
+  i
+  0
+
+*********
+Problem 5
+********
+
+H = 6
+J = 31
+
+*********
+Problem 6
+********
+
+C
+D
+A
+E
+
+*********
+Problem 7
+********
+
+long test(long a, long b, long c)
+{
+  long answer = 5;
+  switch(a)
+  {
+    case 5:
+      c = b ^ 15;
+      /* Fall through */
+    case 7: (or 0)
+    case 0: (or 7)
+      answer = c + 112;
+      break;
+    case 2: (or 4)
+      answer = (c + b) << 2; (or 12)
+      break;
+    case 4: (or 2)
+      answer = 12; (or (c + b) << 2)
+      break;
+    default:
+      answer = 5;
+  }
+
+  return answer;
+}
+
+*********
+Problem 8
+********
+
+A.
+
+Allocate bytes as:
+
+   aaaabbxxcccccccc
+   dxxxeeeefxxxgggg
+   hhhhxxxx
+
+B. Answers vary.  Here is one solution:
+
+   ccccccccaaaaeeee
+   gggghhhhbbdfxxxx
+
+C. 12
+
+D. 4

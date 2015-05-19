@@ -1,0 +1,90 @@
+Exam 2, version 1 
+Solutions
+CS 213 Fall 2008
+
+*********
+Problem 1
+*********
+
+[28] f0 83 04 08
+
+*********
+Problem 2
+*********
+
+m h m h m
+m m h m h
+m h m h m
+m m h m h
+m h m h m
+
+*********
+Problem 3
+*********
+
+4,   200, 5
+200, 300, 204
+4, 400, 8
+
+*********
+Problem 4
+*********
+
+A) All possible outputs of the program are:
+
+112254
+121254
+122154
+
+B)  New number of possible outputs = 18
+
+*********
+Problem 5
+*********
+
+No Yes Yes No Yes
+
+*********
+Problem 6
+*********
+
+80
+5ms
+250
+400
+
+*********
+Problem 7
+*********
+
+1 = M
+2 = C
+3 = P
+4 = C
+5 = M
+6 = O
+7 = U
+
+*********
+Problem 8
+*********
+How many bits are needed to represent the virtual address space? 20
+How many bits are needed to represent the physical address space? 18
+How many bits are needed to represent a page table offset? 12
+
+1:
+VPN: 0x15
+TLBI: 0x2
+TLBT: 0x05
+TLB Hit: N
+Page Fault: N
+Physical Address: 0x1B213
+ 
+2:
+VPN: 0x7E
+TLBI: 0x2
+TLBT: 0x1F
+TLB Hit: Y
+Page Fault: N
+Physical Address: 0x01213
+

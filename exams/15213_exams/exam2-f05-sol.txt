@@ -1,0 +1,99 @@
+Exam 2 Solutions
+CS 213 Fall 2005
+
+*********
+Problem 1
+*********
+A. c = 1 (different file tables)
+B. c = 2 (same  file table)
+
+*********
+Problem 2
+*********
+A. 01, 10
+B. 11
+C. 000, 001, 010, 011, 100, 101, 110, 111
+
+*********
+Problem 3
+*********
+Part 1
+A. C = 128 bytes
+B. CT: [12-5], CI: [4-2], CO: [1-0]
+
+Part 2
+address: 0x71a
+bits: 0 0111 0001 1010
+
+CO: 0x2
+CI: 0x6
+CT: 0x38
+hit?: Yes
+byte: 0xeb
+
+address: 0x16e8
+bits: 1 0110 1110 1000
+
+CO: 0x0
+CI: 0x2
+CT: 0xb7
+hit?: no
+byte: --
+
+Part 3
+
+Addresses that hit in set 2:
+0x16c8--0x16cb
+0x1788--0x178b
+
+*********
+Problem 4
+*********
+arr_sum1:
+
+m h h
+m m h
+m h h
+m m h
+
+arr_sum2:
+
+m h m
+h m h
+m h m
+h m h
+
+*********
+Problem 5
+*********
+A. 
+VA bits: 28
+PA bits: 26
+Number of PTEs: 2^(28-12) = 2^16
+
+B. 
+VA: 0x844044
+VPN: 0x844
+TLBI: 0x4
+TLBT: 0x108
+TLB hit or miss?: miss
+PPN: 0x78f
+PA: 0x78f044
+
+C. 
+VA: 0x839108
+VPN: 0x839
+TLBI: 0x1
+TLBT: 0x107
+TLB hit or miss?: hit
+PPN: 0xAD3
+PA: 0xAD3108
+
+
+*********
+Problem 6
+*********
+A. CPE = 12
+B. CPE = 8.5
+C. CPE = 9.5
+D. CPE = 6

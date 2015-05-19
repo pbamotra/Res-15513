@@ -1,0 +1,201 @@
+Exam 1 Solutions
+CS 213 Spring 2009
+
+*********
+Problem 1
+*********
+
+Description                    Decimal Binary
+Bias                           3       ------
+Smallest Positive positive     1/16    000001
+Lowest finite                  -14     111011
+Smallest positive normalized   1/4     000100
+------                         -7/16   100111
+------                         5/4     001101
+------                         -5/8    101001
+------                         13(12)  011010
+
+*********
+Problem 2
+*********
+a) 32 bytes
+
+b) 6 bytes
+
+c) fun2
+   fun4
+   fun3
+   fun1
+
+d)0x000f
+  0xbfb2ffdc
+  0x0000000c
+  0x0012
+
+  0x000000f3
+  0x000000d5
+  0x000000c
+  0x01
+
+
+
+*********
+Problem 3
+*********
+
+
+int switchfn(inta, longb) {
+ 
+ int y=0,x=)xdeadbeef;
+ switch(A*b) {
+
+ case 1:
+  return 24;
+
+ case 6: 
+ 
+  a= x + b*4;
+  return a;
+
+ case 0:
+  return a+b;
+
+ case 4:
+  x=a;
+  y*=b;
+  break;
+
+ case 2:
+  a= y==x;
+
+ case 3:
+
+ b = y<x;
+ 
+ case 5:
+ 
+  return a/b;
+ }
+
+return x==y;
+
+}
+
+
+*********
+Problem 4
+*********
+
+void mystery_sort (long* array, long len)
+{
+  long a, b, tmp;
+  
+  while(len>0)
+  {
+  
+    a = 0;
+
+    for(b=len-1; b>0; b--)
+    {
+      if(array[b]>array[a])
+      {
+        a=b;
+      }
+    }
+
+    len--;
+    tmp = array[len];
+    array[len] = array[a];
+    array[a] = tmp;
+}
+
+
+*********
+Problem 5
+*********
+a
+a
+b
+b
+a
+
+d
+d
+b
+b
+a
+c
+
+Update 10/6/11 by Taerim Kim:
+Although C was accepted as the solution in Spring 2009, none of the choices
+for Problem 5 Question 11 are correct.
+
+*********
+Problem 6
+*********
+a)
+
+Enter new stack frame by saving old base pointer and
+allocating space by subtracting from stack pointer
+
+b)Fill into dissasembly of foo
+
+0x8, 0xc, 0x10, 0x14
+or
+8, 12, 16, 20
+
+
+c)
+The new foo is not saving the old ebp. This makes 
+the stack frame 4 bytes shorter
+
+ old                 new
+ ------             ------
+| args |           | args |
+| ret  |           | ret  |
+| ebp  | ebp       |      |
+|      |           |      |
+|      |           |      |
+|  ... |           | ...  |
+|      |           |      |
+|______| esp       |______| esp
+
+
+
+d)
+
+0x44, 0x48, 0x4c, 0x50
+or
+68, 72, 74, 80
+
+e)
+Advantages:
+ save space (4 bytes per stack frame)
+ save time (don't execute enter leave instructions)
+ %ebp can now be used as GPR
+Drawbacks:
+ makes debugging "impossible" as you can no longer 
+ easily get a stack trace by climbing the stack with the base pointer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

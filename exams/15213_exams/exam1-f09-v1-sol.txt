@@ -1,0 +1,145 @@
+Exam 1, Version 1 (day listed as "Thursday")
+Solutions
+15-213/18-243 Fall 2009
+
+*********
+Problem 1
+*********
+
+Part A.
+
+0
+Nan
+2^-149
+
+Part B.
+
+False
+True
+True
+True (!ux is a signed int)
+
+*********
+Problem 2
+*********
+
+A.
+aaaaaaaaaxb1b2b3
+ccccdxxxeeeexxxx
+ffffffffggxxxxxx<-end
+
+B.
+ffffffffcccceeee
+b1b2b3ggaaaaaaaa
+adxxxxxx<-end
+
+C. 14
+D. 6
+
+*********
+Problem 3
+*********
+
+Format A             Format B
+Bits         Value   Bits       Value
+0111 0000    1       011111 00  1
+1101 1100    112     100101 11  112
+0110 0111    23/32   011110 10  24/32
+1111 0000    inf     110111 10  3*2^23
+0000 0101    5/1024  010111 01  5/1024
+
+*********
+Problem 4
+*********
+
+int foo (unsigned int a)
+{
+    int b = 0;
+    switch (a + 1) {
+      case 0:
+        b = a >> 1;
+        __________;
+      case 1:
+        b = ~b;
+        ______;
+      case 2:
+        b = -b;
+        break;
+      case 3:
+        b = a;
+        _____;
+      case 4:
+        b = b ^ a;
+        break; // optional break (falls through either way)
+    }
+    return b;
+}
+
+4. a == -1 => Tmin
+   a == 0 => 6
+   a == 1 => -5
+   a == 2 => 0
+   a == 3 => 6
+   o.w.   => 5
+
+*********
+Problem 5
+*********
+
+odin    b
+dva     e
+tri     a
+chetyre d
+
+*********
+Problem 6
+*********
+
+a) ecx = rax + r8
+b) eax = *(rdi + rax)     // rdi is int *
+   eax = *(rdi + 4 * rax) // rdi is char *
+c) no stack to return from, no push %ebp
+d) x86_64
+32-bit has les registers than 64-bit mode, so local variables
+would need to be stored on the stack. Stack accessing takes
+extra instructions and extra time.
+e) 
+int mystery (int * array, size_t size, int e){
+    int a;
+    int max = size;
+    int min = 0;
+    while (max - min > 0) {
+        a = (max - min) / 2 + 1;   
+        if (array[a] < e) {
+            max = a;
+        } else if (array[a] < e) {
+            min = a;
+        } else { 
+            return a
+        }    
+    }
+    return -1;
+}
+
+f) Binary Search
+
+*********
+Problem 7
+*********
+
+1. b
+2. c
+3. c
+4. b
+5. b
+6. a
+7. a
+8. b
+9. d
+
+*********
+Problem 8
+*********
+
+H = 28
+J = 15

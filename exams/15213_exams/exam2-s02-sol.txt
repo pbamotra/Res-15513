@@ -1,0 +1,143 @@
+15-213 Spring 2002
+Exam #2 Solutions
+
+
+Problem 1. (4 points)
+
+  A. Miss rate for writes to surface: 5%
+  B. Miss rate for writes to surface: 10% 
+  C. Miss rate for writes to surface: 20% 
+  D. Miss rate for writes to surface: 20% 
+
+
+Problem 2. (12 points)
+
+  Part I:
+
+    A. Bits 25 - 9, inclusive, are the VPN
+       Bits 8  - 0, inclusive, are the VPO
+
+    B. Bits 11 - 9, inclusive, are the PPN
+       Bits  8 - 0, inclusive, are the PPO
+
+    C. 2^26 bytes
+       2^12 bytes
+       4 bits
+       2^17 * 4 bits = 2^16 bytes
+
+  Part II:
+
+    A. The .text region is read-only. Hence, the operating system only has 
+       to map the proper portions of the virtual address space to the same 
+       physical pages, rather than copy them, to save memory.
+
+       The .data region, however, must be copied since it can be modified 
+       by the new process.
+
+    B. The simple answer is copy-on-write to those in the know.  Students
+       will most likely answer in the following vein:
+
+       In this case, the operating system has no real need to copy the .data 
+       region since it is never changed.  However, the operating system does 
+       not know that.
+
+       We already know it does not have to copy the code from part A.  This 
+       leaves us with the .data region.
+
+       Right after {\tt fork()} is called, the .data region looks exactly the 
+       same as it did before {\tt fork()} was invoked.  Therefore, the 
+       operating system need not copy these pages immediately, but must be 
+       prepared to do so in the case that either of the processes does modify 
+       this region.
+
+       Hence, the operating system can capture when the .data region is 
+       modified by marking the pages in the region read-only and copying the 
+       accessed page when the process attempts to modify such a page (and 
+       marking the new page read-write).
+
+
+Problem 3. (13 points)
+
+  Part I: 
+
+    1. VPN:  [16-8]     VPO: [7-0]
+       TLBT: [16-10]   TLBI: [9-8]
+
+    2. PPN: [11-8]      PPO: [7-0]
+
+  Part II: 
+
+    1. 0 0001 1111 1010 1101
+
+    2. VPN:        01F
+       TLBI:       3
+       TLBT:       7
+       TLB hit?    N
+       page fault? N
+       PPN:        B
+
+    3. 1011 1010 1101
+
+    4. Block Offset: 1
+       Cache Index:  3
+       Cache Tag:    5D
+       Cache Hit:    Y
+       Cache Byte:   8
+
+
+Problem 4. (7 points)
+
+  0. 2
+  1. 5
+  2. 10
+  3. 4
+  4. 1
+  5. 2
+  6. 4
+
+
+Problem 5. (6 points)
+
+  A. Blank 1: kill(child_pid, SIGKILL);
+     Blank 2: signal(SIGINT, handler);
+     Blank 3: setpgid(0,0);
+     Blank 4: (empty)
+
+     Line 2 and 4 are interchangable.
+
+  B. Nothing happens because the signals are not queued.  When the user
+     presses Ctrl-C, the signal gets lost since we are already in the
+     signal handler.
+ 
+
+Problem 6. (12 points)
+
+  A. Label the entries within the .plt
+
+     "Dynamic Linker" (e)
+     "Dynamic linker" (e) or "none of the above" (f)
+     "fflush()" (d)
+     "malloc()" (a)
+     "none of the above" (f)
+     "none of the above" (f)
+     "printf()" (c)
+     "sprintf()" (b)
+
+  B. Label the entries within the .got
+
+     "Dynamic linker" (e) 
+     "Dynamic linker" (e) or "none of the above" (f)
+     "Dynamic linker" (e) or "none of the above" (f)
+     "Dynamic linker" (e) or "none of the above" (f)
+     "fflush()" (d)
+     "malloc()" (a)
+     "none of the above" (f)
+     "none of the above" (f)
+     "printf()" (c)
+     "sprintf()" (b)
+
+  C. Place each dump of the .got in time:
+
+     "before execution"
+     "before main()"
+     "line 10" or  "0x80484c3"

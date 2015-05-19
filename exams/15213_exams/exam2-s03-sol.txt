@@ -1,0 +1,123 @@
+Exam 2 Solutions
+CS 213 Spring 2003
+
+*********
+Problem 1
+*********
+a,c
+
+Yes
+
+Less loop overhead
+
+No
+
+Registers will spill to stack
+
+*********
+Problem 2
+*********
+
+C0: bit 0
+CI: bits 1-3
+CT: bits 4-11
+
+EE4:
+	1110 1110 0100
+CO:	0x0
+CI:	0x2
+CT:	0xEE
+Hit?	Yes
+Byte:	0xFF
+
+B4A:
+	1011 0100 1010
+CO:	0x0
+CI:	0x5
+CT:	0xB4
+Hit?	No	(The valid bit is not set!)
+Byte:	-
+
+
+*********
+Problem 3
+*********
+
+A. Yes: 2
+B. Yes: 2,4,7,3
+C. Yes 3,7
+
+*********
+Problem 4
+*********
+
+1/16
+1/8
+
+1/2
+1/2
+
+1/4
+
+1/1
+1/160
+
+*********
+Problem 5
+*********
+
+Part I
+======
+A. VPO: 9:0   (10 bits)
+   VPN: 23:10 (14 bits)
+
+B. PPO: 9:0   (10 bits)
+   PPN: 15:10 (6 bits)
+
+C. 2^24 bytes
+   2^16 bytes
+   8 bits
+   2^14 bytes
+
+Part II
+=======
+1. Address translation causes latency in each non-cached memory access
+2. Page tables cause extra memory to be used, which is critical on a console.
+
+Some students noted that virtual memory can introduce "memory bugs" (leaks,
+page faults, etc.) and that applications can crash that way.  This is true, but
+applications running without a virtual memory subsystem can also crash the
+system in various ways (illegal instruction, misaligned memory access, writing
+to shared buffers for system peripherals, etc.).  Hence, this isn't a valid
+answer.
+
+
+
+*********
+Problem 6
+*********
+
+12344
+12434
+14234
+
+*********
+Problem 7
+*********
+
+ok X X X X ok
+
+*********
+Problem 8
+*********
+
+A. registers, stack, global data
+B. correctly handles cyclic memory references
+C. y may get written over by a write to x
+D. True
+E. True
+F. False
+G. False
+H. False
+
+

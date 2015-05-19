@@ -1,0 +1,129 @@
+Exam 2 Solutions
+CS 213 Fall 2001
+
+*********
+Problem 1
+*********
+
+A.
+Call point	Times Called
+MIN1		1
+MAX1		1
+MIN2		1
+MIN3		1
+MAX2		m+1
+MIN4		m
+MIN5		n
+Total		2m + n + 5
+
+B. There are n-1 comparisons in
+a single call to min_val or max_val.
+
+C. There are a total of (2m + n + 5)(n-1)
+comparisons.
+
+*********
+Problem 2
+*********
+	build_pop1	build_pop2
+Dense	O(n^2)		O(n)
+Matched	O(n^2)		O(n)
+Sparse	O(n^3)		O(n^2)
+
+*********
+Problem 3
+*********
+1. CT: [11-4] CI: [3-1] CO: [0]
+
+2(a): 00111011 011 0
+
+2(b):
+	Parameter    Value
+	CO	     0x0
+	CI	     0x3
+	CT	     0x3b
+	Hit?	     Yes
+	Byte	     0x66     
+
+*********
+Problem 4
+*********
+A. 12.5%
+B. 25%
+C. 25%
+D. 25%
+
+*********
+Problem 5
+*********
+
+A.
+	dst array		src array
+	col 0	col 1		col 0 col 1
+row 0	m	h	row 0	m     m
+row 1	m	m	row 1	m     m
+
+
+B.
+	dst array		src array
+	col 0	col 1		col 0 col 1
+row 0	m	h	row 0	m     h
+row 1	m	h	row 1	m     h
+
+*********
+Problem 6
+*********
+A. Y
+B. N
+C. Y
+D. Y
+E. N
+
+
+*********
+Problem 7
+*********
+val = 15
+(remember: processes have separate address spaces)
+
+
+*********
+Problem 8
+*********
+
+Part 1. 
+
+VPN: [19-12] VPO: [11-0]
+TLBT:[19-14] TLBI:[13-12] 
+
+PPN: [15-12] PPO: [11-0]
+
+Part 2. 
+
+(a) VA = 0x7e37c (0111 1110 0011 0111 1100)
+
+(b)
+	VPN		0x7e
+	TLBI		0x2
+	TLBT		0x1f
+	TLB hit?	yes	 
+	Page fault?	no
+	PPN		0x8
+
+(c) PA = 1000 0011 0111 1100
+
+
+
+(a) VA = 0x16a48 (0001 0110 1010 0100 1000)
+
+(b)
+	VPN		0x16
+	TLBI		0x2
+	TLBT		0x5
+	TLB hit?	no
+	Page fault?	yes
+	PPN		0x-
+
+(c) PA = (none)
+
+

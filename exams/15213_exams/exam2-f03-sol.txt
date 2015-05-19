@@ -1,0 +1,126 @@
+Exam 2 Solutions
+CS 213 Fall 2003
+
+*********
+Problem 1
+*********
+Part 1.      CT: [12-5]   CI: [4-2]   CO: [1-0]
+
+Part 2.
+Address  0x1314	10011000 101 00
+CO:            0x0
+CI:            0x5
+CT:            0x98
+cache hit?     Y
+cache byte?    0x80
+
+Address  0x08DF	01000110 111 11
+C0:             0x3
+CI:             0x7
+CT:             0x46
+cache hit?      N
+cache byte?     -
+
+Part 3. Addresses that will hit in set 3:
+0x180C -- 0x180F and 0x114C -- 0x114F
+
+Part 4. Probability of cache hit: 100% 
+
+*********
+Problem 2
+*********
+Part 1
+(a) VPN: [21-11]     VPO: [10-0]
+    TLBT: [21-14]    TLBI: [13-11]
+
+(b)  PPN: [17-11]     PPO: [10-0]
+
+Part 2
+(a)    00 0000 0101 1110 1110 1100
+
+(b)   VPN:	  0x00B
+      TLBI:	  0x3
+      TLBT:	  0x1
+      TLB hit?	  N (valid bit not set)
+      page fault? Y
+      PPN:	  -
+
+(c):     -
+
+Part 3
+(a):    00 0000 1010 1111 1001 1101
+
+(b)   VPN:	  0x015
+      TLBI:	  0x5
+      TLBT:	  0x2
+      TLB hit?	  Y
+      page fault? N
+      PPN:	  0x4A
+
+C:    1 0010 1011 1001 1101
+
+
+*********
+Problem 3
+*********
+Part 1 (key is recognizing conflict misses):
+HHM
+MMH
+MHH
+---
+HMM
+MMM
+MHM
+
+Part 2 (no conflict misses because of higher associativity):
+HHH
+HHH
+HHH
+---
+HHM
+HHM
+HHM
+
+*********
+Problem 4
+*********
+Part 1
+N=8 the miss-rate is 9.3% (174 hits / 18 misses)
+N=64, 27.1\% (8960H, 3328M)
+N=60, 11.5\% (9555H, 1245M)
+
+Part 2:
+Read X first, then update A:
+t = X[j];
+t += A[i][j]
+A[i][j] = t;
+
+
+Part 3: 
+10.42% (11008H, 1280M) (eliminates conflicts between X and A)
+
+*********
+Problem 5
+*********
+Answers:
+A. Yes 3. Potential for dereferencing bad pointer (if malloc() returns NULL)
+B. Yes 2. Potential memory leak (if list == NULL)
+C. Ambiguous. +3 for everyone.
+
+*********
+Problem 6
+*********
+A. N
+B. Y
+C. N
+
+Only 1 possible string that starts with 234
+
+*********
+Problem 7
+*********
+A. baz.txt will contain:
+you
+wyn
+
+B. There will be no output on stdout.

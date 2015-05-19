@@ -1,0 +1,64 @@
+15-213 Fall 2004, Exam 2 Solution
+
+1. A: Yes, B: No
+   C: Suppose remove_datum gets interrupted after line 37; the signal
+      handler inserts a node just before the new one, and then remove_datum
+      completes.  Then the new node will become orphaned.
+   D: There are multiple techniques:
+      One simple way is to block SIGUSR2
+      never executing code that modifies a list.
+
+2. Part I:
+  1.
+   O: X bits 11--0
+   N: X bits 19--12
+   I: X bits 14--12
+   T: X bits 19--15
+      
+  2.
+   O: X bits 11--0
+   N: X bits 17--12
+
+Part II
+
+0xD8AC3:
+  VA: 11011000101011000011
+  VPN: 0xD8
+  TLBI: 0x0
+  TLBT: 0X1b
+  TLB Hit: Y
+  Page Fault: N
+  PPN: 0x2D
+  PA: 101101101011000011
+
+0x1665D
+  VA: 00010110011001011101
+  VPN: 0x16
+  TLBI: 0x6
+  TLBT: 0X02
+  TLB Hit: N
+  Page Fault: N
+  PPN: 0x31
+  PA: 110001011001011101
+
+3. Two outputs shown in columns 1 and 5 are possible.
+
+4. Case 1: 100%, 25%
+   Case 2: 25%, No/Yes
+
+5. F F T F T T
+
+6.. Part I
+   A. MMM/MMM/MMM
+   B. MMH/MMH/MMH
+
+   Part II
+   A. HHH/HHH/HHH
+   B. HHM/HHM/HHM   
+
+7. A: 3/2
+   B: 1/6
+   C: 1/3
+
+
+

@@ -1,0 +1,84 @@
+Exam 2 Solutions
+CS 213 Fall 2006
+
+*********
+Problem 1
+*********
+A.
+P1. cpe=17
+P2. cpe=10
+P3. cpe=5
+P4. cpe=12
+P5. cpe=5
+
+B.
+P3
+
+*********
+Problem 2
+*********
+A. 
+m m m m
+m m m m
+
+B.
+m h m h
+m h m h
+
+*********
+Problem 3
+*********
+Case 1
+1. miss rate=100%
+2. miss rate=50%
+
+Case 2
+1. miss rate=50%
+2. larger cache size will help to reduce miss rate? No
+3. larger cache line will help to reduce miss rate? Yes
+
+*********
+Problem 4
+*********
+How many bits are needed to represent the virtual address space? 20
+How many bits are needed to represent the physical address space? 18
+What is the maximum number of page table entries? 256
+
+1:
+VPN: 0xFA
+TLBI: 0x2
+TLBT: 0x1F
+TLB Hit: Y
+Page Fault: N
+Physical Address: 0x01A3F
+ 
+2:
+VPN: 0x16
+TLBI: 0x6
+TLBT: 0x02
+TLB Hit: N
+Page Fault: N
+Physical Address: 0x312A4
+
+*********
+Problem 5
+*********
+Part 1: correct: (1), (3), (5), (6)
+Part 2: correct: (1) 
+
+*********
+Problem 6
+*********
++1 for each answer from the list below
+-1 for each answer not from the list below
+
+Outputs:
+3	234	4323
+24	233	4233
+42	243	2343
+34	323	2433
+43	343
+32	423
+23	433
+33	432
+

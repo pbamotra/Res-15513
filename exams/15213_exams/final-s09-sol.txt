@@ -1,0 +1,390 @@
+*************
+Problem 1
+*************
+1. PDE address: 0x020c
+    PDE contents: 0x1501
+    PTE address: 0x1540
+    Physical address: 0x3f3b
+
+2. PDE address: 0x0228
+    PDE contents: 0x1681
+    PTE address: 0x16a4
+    Physical address: Page fault
+
+*************
+Problem 2
+*************
+ddccbbaa
+
+*************
+Problem 3
+*************
+1.16
+2. 2
+3. (a) 1/4
+  (b) Compulsory
+  (c) No
+4. (a) 1/2
+  (b) Compulsory & conflict
+5. (a) 1/4
+  (b) Compulsory
+  (c) Yes
+
+*************
+Problem 4
+*************
+
+Program 1 does not terminate, because the forked child process has its own address
+ space, including the heap.  Thus, manipulation of *x in the child does not affect 
+ the parent, and while(*x) continue; loops forever.
+
+Program 2 does not terminate, because the set of signals blocked is copied by the 
+ fork, so unblocking it in the parent has no effect on the child.  Thus, signaling 
+ the child has no effect, and, as the child is in an infinite loop, the parent 
+ will wait forever.
+
+Program 3 does terminate, because the default behavior of SIGKILL cannot be changed.
+ Thus, sending a SIGKILL to the child immediately kills it and the wait successfully 
+ finishes without blocking (for long at least).
+
+*************
+Problem 5
+*************
+
+squareNumber - 0x4(%ebp) is actually the return address.  This should be 0x8(%ebp).
+
+fourth - pop %ebp and leave are redundant.  This would actually result in a messed 
+ up stack frame and returning to the address of the string, which would likely 
+ cause an invalid opcode fault.
+
+unrandomNumber - 0x4 should be $0x4.  0x4 will attempt to dereference the memory at 
+ 0x4, which will cause a segfault (as the first page is always unmapped to the 
+ userland process so 0x0 works as expected).
+
+**************
+Problem 6
+**************
+On socket error: exit(-1);
+On recv error: break;
+On send error: break;
+
+Bug 1: buffer is a global variable and shared by all
+ threads, there exists a race condition in reading and writing
+ to the shared buffer.  Solving this race condition would
+ require making buffer a local variable to handleConnection();
+
+Bug 2: send() is not guaranteed to send all of the buffer in one
+ call.  This is referred to as a send short count.  You must examine
+ the positive return values of send to verify that it did send all
+ of the data, and resend if necessary.
+
+
+**************
+Problem 7
+**************
+1. 63*(2^26) or any equivalent number
+2. 2^-35 or any equivalent number
+3. 256
+4. 7
+5. 4
+6. c
+7. c
+
+**************
+Problem 8
+**************
+1. Harry did not account for the null terminator in the string when
+ he malloc'd space for it.  The correct action would have been to
+ call malloc(strlen(word) +1);
+
+2. Malloc has a minimum payload size of 12 bytes (prev + next + footer).
+ Any allocations for space less than 12 bytes will still receive twelve
+ bytes. So for an 11 character word, the null terminator will take that
+ 12th spot and fit perfectly.  But for a 12 character word, the null
+ terminator will overwrite the header of the next block and cause problems.
+    With sizes above 12, malloc must maintain the 8 byte alignment principle,
+ so requesting 13 bytes will get you 20 and so on. With words of size 12+8n 
+ these also will fit perfectly inside the allocated space, and therefore the
+ null terminator will cause a seg fault.
+
+**************
+Problem 9
+**************
+Y N
+N N
+N N
+N N
+N N
+Y N
+N N
+N N
+Y Y
+
+
+**************
+Problem 10
+**************
+1. 0xbfc5e4f8
+2. fact(2) - 16, fact(1) - 12
+3. 28
+4.  -------------
+    |0x804837e  |
+    |0xbfc5e4f8 |
+    |0xdeadbeef |
+    |0x1        |
+    |0x8048363  |
+    |0xbfc5e4e8 |
+    |0x2        |
+    |     -     |
+    |    ...    |
+    -------------
+
+**************
+Problem 11
+**************
+
+Anything in square brackets [] are grading comments and should not be
+considered as part of the correct solution.  For stacks, each line
+represents 4 bytes of the stack with memory addresses in decreasing order.
+
+1. (4 points) 0x804837c
+
+2. (6 points)
+
+ +----------------------------+
+ |  return address (to main)  |
+ +----------------------------+
+ |         saved %ebp         |
+ +----------------------------+
+ |       8 byte padding       |
+ |                            |
+ +----------------------------+
+ |      array of 16 bytes     |
+ |                            |
+ |                            |
+ |                            |
+ +----------------------------+
+ |      array of 16 bytes     |
+ |                            |
+ |                            |
+ |                            |
+ +----------------------------+
+ |       4 byte padding       |
+ +----------------------------+
+ |         argument 3         |
+ +----------------------------+
+ |         argument 2         |
+ +----------------------------+
+ |         argument 1         |
+ +----------------------------+
+ | return address (to ckpass) |
+ +----------------------------+
+
+[The following solution was also accepted:]
+
+ +----------------------------+
+ |  return address (to main)  |
+ +----------------------------+
+ |         saved %ebp         |
+ +----------------------------+
+ |      array of 24 bytes     |
+ |                            |
+ |                            |
+ |                            |
+ |                            |
+ |                            |
+ +----------------------------+
+ |      array of 16 bytes     |
+ |                            |
+ |                            |
+ |                            |
+ +----------------------------+
+ |       4 byte padding       |
+ +----------------------------+
+ |         argument 3         |
+ +----------------------------+
+ |         argument 2         |
+ +----------------------------+
+ |         argument 1         |
+ +----------------------------+
+ | return address (to ckpass) |
+ +----------------------------+
+
+3. (5 points)
+
+int ckpass()
+{
+    char a[16];
+    char b[16];
+    
+    memset(a, 0, 16);
+
+    gets(a);
+
+    hashpass(b, a);
+
+    return strcmp(b, good_hash);
+}
+
+[The following solution was also accepted:]
+
+int ckpass()
+{
+    char a[24];
+    char b[16];
+    
+    memset(a, 0, 16);
+
+    gets(a);
+
+    hashpass(b, a);
+
+    return strcmp(b, good_hash);
+}
+
+4. (4 points)
+
+The gets() function can read a string of unlimited length from the input.  The
+ckpass() function uses gets() with a buffer of fixed length.  Thus, it is possible
+for a malicious user to input a password string which causes gets() to write beyond
+the length of the buffer.  Since the buffer is stored on the stack, this buffer overflow
+could corrupt other objects on the stack, such as the return addresses and saved
+registers, which could make the program behave in unexpected ways [such as executing
+arbitrary code!].
+
+5. (5 points)
+
+[A general description such as the following was what we were looking for:]
+
+Craft a password string which sets the return address supplied by main for ckpass
+to the address of execl, adds a fake return address above that with arbitrary data,
+then above that builds the arguments to execl (a pointer to the hax string, followed
+by another pointer to the hax string, followed by a null pointer).  The hax string
+must also be included in the password string, and can either be placed at the beginning
+(in the 28 bytes of stack data which must be overwritten to get to the return address)
+or after the null pointer argument to execl. [You did not need to describe both placements
+for the hax string, one was enough for full credit.] Input this password string when
+prompted by Harry's program.
+
+[A more detailed description was also accepted (but unnecessary as we asked for a stack
+drawing in part 6):]
+
+Craft a password string as follows:
+
+- 28 bytes of arbitrary data followed by
+- the address of execl (0x804837c) followed by
+- 4 bytes of arbitrary data (the fake return address for execl) followed by
+- a pointer to the hax string followed by
+- a pointer to the hax string followed by
+- a null pointer (0x00000000) followed by
+- the hax string, including a null terminator (21 bytes)
+
+and input the password string when prompted by Harry's program.
+
+[Alternative solution if you put the hax string before the return address manipulation:]
+
+Craft a password string as follows:
+
+- the hax string, including a null terminator (21 bytes) followed by
+- 7 bytes of arbitrary data followed by
+- the address of execl (0x804837c) followed by
+- 4 bytes of arbitrary data (the fake return address for execl) followed by
+- a pointer to the hax string followed by
+- a pointer to the hax string followed by
+- a null pointer (0x00000000)
+
+and input the password string when prompted by Harry's program.
+
+[In the above solution, the hax string could be placed anywhere in the first
+28 bytes.]
+
+6. (6 points)
+
+[The 0xDEADBEEF entries below could be any data (not just 0xDEADBEEF).]
+
+ +----------------------------+
+ |                            |
+ |                            |
+ |                            |
+ |                            |
+ |                            |
+ |   "/home/213student/hax"   | [<-- 21 bytes, including null term.]
+ +----------------------------+ [<-- 0xffffce40]
+ |         0x00000000         |
+ +----------------------------+
+ |         0xffffce40         |
+ +----------------------------+
+ |         0xffffce40         |
+ +----------------------------+
+ |         0xDEADBEEF         |
+ +----------------------------+
+ |         0x0804837c         |
+ +----------------------------+ <-- %esp [0xffffce2c]
+ |         0xDEADBEEF         |
+ |         0xDEADBEEF         |
+ |         0xDEADBEEF         |
+ |         0xDEADBEEF         |
+ |         0xDEADBEEF         |
+ |         0xDEADBEEF         |
+ |         0xDEADBEEF         |
+ +----------------------------+
+
+[The following solution was also accepted:]
+
+ +----------------------------+
+ |         0x00000000         |
+ +----------------------------+
+ |         0xffffce10         |
+ +----------------------------+
+ |         0xffffce10         |
+ +----------------------------+
+ |         0xDEADBEEF         |
+ +----------------------------+
+ |         0x0804837c         |
+ +----------------------------+ <-- %esp [0xffffce2c]
+ |         0xDEADBEEF         |
+ +----------------------------+
+ |                            |
+ |                            |
+ |                            |
+ |                            |
+ |                            |
+ |   "/home/213student/hax"   | [<-- 21 bytes, including null term.]
+ +----------------------------+ [<-- 0xffffce10]
+
+[As in part 5, the hax string could be located anywhere within the first
+28 bytes, as long as the pointers were adjusted accordingly.]
+
+**************
+Problem 12
+**************
+a) Possible outputs are 1 and 2.
+
+For 1, both threads' load operations must occur before either store operation.
+For 2, the threads' execution would be serialized.
+
+b)
+
+2000: true. "optimal" case.
+
+1500: true. the race will be lost sometimes.
+
+2: true. execution is as follows (L = load, I = increment, S = store):
+
+time --->
+thread 1: L,I                  S       L,I,S x999
+thread 2:      L,I,S x999     L,I                 S
+
+1: no. each store instruction will store a value of at least one, and in order
+to produce a 1 as final output, the final load of whichever thread performs
+the final store must load a 0; if this is the case, all previous stores must
+have been 0, which is impossible.
+
+c)
+
+thread 1: perform comparison, see locked == 0. fall out of loop.
+thread 2: perform comparison, see locked == 0. fall out of loop.
+thread 1: assign locked = 1
+thread 2: assign locked = 1
+
+

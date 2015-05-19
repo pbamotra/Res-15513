@@ -1,0 +1,170 @@
+15-213 Exam 1 Spring 2002
+Solutions
+
+Question 1:
+
+   Expression   decimal     binary
+  -----------------------------------
+  Zero       |     0     |  00 0000
+  ---        |    -3     |  11 1101
+  ---        |   -14     |  11 0010
+  ux         |    51     |  11 0011
+  y          |    -3     |  11 1101
+  x >> 2     |    -4     |  11 1100
+  TMax       |    31     |  01 1111
+  -----------------------------------
+
+
+Question 2:
+
+  Description          |     Binary   |    M    |   E    |   Value
+  ------------------------------------------------------------------
+  Positive Zero        |  0 000 0000  |    0    |   -2   |   0.0
+  ------------------------------------------------------------------
+  ---                  |  0 000 0101  |   5/16  |   -2   |   5/64
+  ------------------------------------------------------------------
+  Largest Denormalized |  0 000 1111  |  15/16  |   -2   |  15/64
+  ------------------------------------------------------------------
+  Smallest Normalized  |  1 001 0000  |   8/8   |   -2   |   -1/4
+  ------------------------------------------------------------------
+  Negative Two         |  1 100 0000  |    1    |    1   |   -2.0
+  ------------------------------------------------------------------
+  ---                  |  1 110 1101  |  29/16  |    3   |   -14.5
+  ------------------------------------------------------------------
+  Negative infinity    |  1 111 0000  |   ---   |   ---  | -infty
+  ------------------------------------------------------------------
+
+
+Question 3:
+
+  A. 4
+
+  B.  0      1      2     4      8        14    16   24  26    32
+     |--------------------------------------------------------|
+     | c[0] | c[1] | pad | intp | union1 | pad | d  | s | pad |
+     |--------------------------------------------------------|
+
+  C. 32 bytes
+
+  D. 24 bytes
+
+
+Question 4:
+
+  int foo (int op, int a, int b)
+  {
+    int result = 0;
+
+    switch (op)
+    {
+       case 0: result = a & b; break;
+       case 1: result = a | b; break;
+       case 2: result = a ^ b; break;
+       case 3: result = ~a   ; break;
+       case 4: result = a + b; break;
+    }
+
+    return result;
+  }
+
+
+Question 5:
+
+  A.
+     -- alloc --
+
+    Uses the next free BP register to save the number of the last
+    used stack register.
+  
+    Why don't we have to save the 'old base pointer'?
+
+    There is a separate register for each stack frame.  Hence, there's no
+    need to save any values - they are automatically saved by the BPn
+    registers.
+
+     -- push --
+
+     Uses the next free STK register to save data on the 'stack' (and
+     increments/decrements some index into the STK registers)
+
+     -- pop --
+
+    Takes the value from the last used register and decrements/increments
+    some index into the STK registers.
+
+
+     -- call --
+
+     Uses the next free RET register to save the return address.
+     Also jumps to the procedure
+
+
+  B. What is the problem with using registers in this fashion?
+
+     Registers only offer a limited, static amount of space.
+
+
+C. Why is the notion of a base pointer still required?
+
+   If the call stack gets too large, the data in these registers still must be
+   saved in a stack-ish area.  Hence, the notion of a base pointer is
+   still required because we may need to save these registers out to a area
+   of memory.
+
+   It's not really a base pointer in the same sense as we know, and the
+   solution to the problem at hand (putting the 'base pointer' in the BP
+   registers) isn't necessarily good either, but at some point, system software
+   will have to save out these registers to a memory area, since the stack
+   must remain valid
+
+    Many people thought that we would still need some memory address to serve
+    as the base pointer because we need it to index on the stack.  However,
+    imagine the case where the STK, BP, and RET sets of registers are
+    infinitely large.  Following the above solution for the operation of each
+    instruction, it is possible to see that there is no reason to keep
+    a base pointer (since there is a BP register for each stack frame and all
+    the BP registers do is store an index - not a pointer) to be able to
+    index into data.
+
+
+Question 6:
+
+  Part A: Send some negative number for index such that cmds[index] is a bad
+          address.
+
+  Part B: Overflow buffer to set the return address to point into the buffer
+          you sent, which contains the code to execute.
+
+  Part C: The head of the buffer should contain the /etc/passwd entry.  
+          Overflow buffer to set return address into the buffer, which sets 
+          result_fname to point to "/etc/passwd" (stored in the sent buffer), 
+          and then code to jump to the line with open().
+
+
+Question 7:
+
+  FindMin:
+    push %ebp
+    push %ebp
+    mov %esp, %ebp
+    push %ebx                   -- save callee-save register
+    mov 0x8(%ebp), %ecx         -- ecx = A
+    mov 0xc(%ebp), %edx         -- edx = size
+    mov (%ecx), %eax            -- eax = min = A[0]
+    mov $0x0, %ebx              -- ebx = i
+    cmp %edx, %ebx              -- cmp size, i
+    jge .done
+  .loop
+    cmp %edx, (%ecx, %ebx, 4)   -- cmp min, A[i]
+    jge .incr
+    mov (%ecx, %ebx, 4), %eax   -- eax = min = A[i]
+  .incr
+    inc %ebx                    -- incr i
+    cmp %edx, %ebx              -- cmp size, i
+    jl .loop
+  .done
+    pop %ebx                    -- restore callee-save reg.
+    mov %ebp, %esp
+    pop %ebp
+    ret
+

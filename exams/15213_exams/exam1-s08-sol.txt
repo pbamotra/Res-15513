@@ -1,0 +1,123 @@
+Exam 1, Version 1 (day listed as "Tue").
+Solutions
+CS 213 Spring 2008
+
+*********
+Problem 1
+********
+
+Decimal | Binary
+   27   | 011011
+  -28   | 100100
+  -21   | 101011
+    3   |    011
+   43   | 101011
+   -8   | 111000
+    8   | 001000
+   -2   |    110
+  -32   | 100000
+
+*********
+Problem 2
+********
+
+A.
+  2^(-149)
+  NaN
+  2^24 + 1
+
+B.
+  False (Tmin)
+  True
+  False (TMax, TMin)
+  True
+
+*********
+Problem 3
+********
+
+A.
+  0 001 1000
+  1 111 0000
+  0 101 0010
+  0.6875 or 21/32
+  -0.125 or -1/8
+  NaN
+
+B.
+  0 000 1111 = 15/64 = 0.234375
+
+C.
+  0 110 1111 = 31/2 = 15.5
+
+*********
+Problem 4
+********
+
+int **
+
+A[i][j]*i*j
+
+*********
+Problem 5
+********
+
+H = 9
+J = 62
+
+*********
+Problem 6
+********
+
+A Wed
+B Mon
+C Thu
+D Tue
+
+*********
+Problem 7
+********
+
+long test(long a, long b, long c)
+{
+  long answer = 0;
+  switch(c)
+  {
+    case 3:
+      answer = b-a;
+      break;
+    case 2: (or 7)
+    case 7: (or 2)
+      answer = b+42;
+      break;
+    case 0:
+      a = a+b;
+      /* Fall through */
+    case 6:
+      answer = a^b;
+      break;
+    default:
+      answer = 0;
+  }
+
+  return answer;
+}
+
+*********
+Problem 8
+********
+
+A.
+ -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+|a |xx|us|us|b |xx|cn|cn|c |xx|xx|xx|xx|xx|xx|xx| e|u | p|r |i |c |e |e | d|xx|
+ -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+ -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+|xx|xx|uk|uk|uk|uk|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+ -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+B. Answers vary.
+
+C. 12
+
+D. 4

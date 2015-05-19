@@ -1,0 +1,80 @@
+Exam 2, version 1 (Day of week listed as "Thu.").
+Solutions
+CS 213 Spring 2008
+
+*********
+Problem 1
+*********
+
+P1 = 6
+P2 = 11
+P3 = 3
+P4 = 8
+
+*********
+Problem 2
+*********
+
+mhh
+hhh
+mhm
+
+*********
+Problem 3
+*********
+
+Case 1: Miss rate = 4192 / 8192
+Case 2: Miss rate = 4096 / 8192
+
+1: Yes, no
+2: Yes, yes
+
+*********
+Problem 4
+*********
+
+1.
+  PDE Address = 0x0021ABFC
+  PTE Address = 0x051763C0
+  Physical Address = 0x08BF1145
+
+2.
+  PDE Adresss = 0x0021B080
+  PTE Address = 0x052DB128
+  Failure: Page not present
+
+*********
+Problem 5
+*********
+
+A. (a) .bss
+   (b) .data
+   (c) .text
+
+B. The string is stored in .rodata, which is read only.
+
+C. (a) No
+   (b) file0's var is local to that file
+       file1's var is a strong symbol and overrides file2's
+
+D. .rodata
+
+*********
+Problem 6
+*********
+
+PB PS PR CS 
+PB PS CS PR 
+PB CS PS PR 
+PB PS PR CS CR 
+PB PS CS PR CR 
+PB CS PS PR CR 
+
+*********
+Problem 7
+*********
+
+A. No, it doesn't allocate space for the NULL terminator.
+
+B. The object allocated in mutex_init is lost.
+   mutex_init doesn't initialize the object that is passed to it.

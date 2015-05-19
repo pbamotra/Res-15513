@@ -1,0 +1,197 @@
+Final Exam Solutions
+CS 213 Spring 2004
+
+*********
+Problem 1
+*********
+A. 5, 10
+B. 0, 0
+C. 0, 5
+D. 5, 0
+E. 23
+
+*********
+Problem 2
+*********
+
+Part 1.
+
+line#   | fd1   | fd2     | fd3     | [foo].pos | [foo].refcnt | [bar].pos| [bar].refcnt
+line 6  | [foo] | ------- | ------- | 0         | 1            | -------  | ------- 
+line 13 | [foo] | ------- | [bar]   | 0         | 2            | 0  | 1
+line 14 | [bar] | ------- | [bar]   | 0         | 1            | 0  | 2
+
+line \# | fd1   | fd2     | fd3     | [foo].pos | [foo].refcnt | [bar].pos | [bar].refcnt
+line 8  | [foo] | ------- | ------- | 0         | 2            | ------- | -------
+line 9  | [foo] | ------- | ------- | 0         | 2            | ------- | -------
+
+
+Part 2.
+
+A. It guarantees that all the data is transmitted, but write()
+doesn't.
+
+
+B. 
+
+192.168.0.1         | 192.168.0.2
+hello world[return] | hello world[return]
+
+
+
+
+
+
+*********
+Problem 3
+*********
+
+
+M = 13
+N = 7
+
+
+
+
+
+*********
+Problem 4
+*********
+
+
+1.
+
+Hello
+Hello
+Hello
+Bye
+
+
+
+2. 0
+
+
+3.
+
+No.
+
+Hello
+Bye
+Hello
+Bye
+Hello
+Bye
+
+
+
+
+*********
+Problem 5
+*********
+
+1. 1
+2. 13
+3. c
+
+
+
+
+
+*********
+Problem 6
+*********
+
+
+1. bar(str=``Walrus'', dp=0xdeadbeef)
+2. hammer(a=15, c='-', i=213)
+3. main(argc=2, argv=[``/bin/foo'', ``Lock'', (NULL)])
+4. Space not needed
+
+
+
+
+
+*********
+Problem 7
+*********
+
+A. Immediate coalescing - you have no idea how long deferred
+coalescing will take... immediate is O(1)...
+
+B. There is no difference since you're using free space (you have a
+minimum block size of 32 bytes).
+
+C. Using 8 segregated lists - one for each size.
+
+
+
+
+
+*********
+Problem 8
+*********
+
+
+Part 1.
+
+void
+foo1(int N, int M, int* a, int *b, int *e)
+{
+   int i,j,k;
+   int iMj = 0;
+   int iMk;
+   int iM = 0;
+   int aiMj;
+   int eiMj1,eiMj2;
+   
+   for (i=0; i<N; i++) {
+      for (j=0; j<M; j++) {
+         aiMj = a[iMj];
+         if (aiMj & 0x1) {
+            iMk = iM;
+            eiMj1 = e[iMj];
+            eiMj2 = 0;
+            for (k=0; k<M; k+=2) {
+               eiMj1 += aiMj*b[iMk];
+               eiMj2 += aiMj*b[iMk+1];
+               iMk+=2;
+            }
+            e[iMj] = eiMj1 + eiMj2;
+         }
+         iMj++;
+      }
+      iM += M;
+   }
+}
+
+
+
+Part 2.
+
+loop interchange, get better cache hit rate
+induction var elimination, eliminate multiplies in favor of adds
+invariant code motion, eliminate unnecc computation
+inline function, eliminate an opt blocker
+strentgh reduction, faster operation (module to mask)
+loop unrolling, reduce loop overhead
+parallelization, eliminate dependencies and increase ILP
+
+
+
+
+
+
+*********
+Problem 9
+*********
+
+1 level, 32K
+2 level, 64K, 4M
+B
+A once HT greater than 250K
+No
+
+
+
+
+

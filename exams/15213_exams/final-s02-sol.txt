@@ -1,0 +1,247 @@
+Question 1:
+
+  In this problem, you will complete a function that converts "float" to
+  "int" without explicit use of a conversion operator. 
+
+    a. u & (1 << 31)
+    b. (u & 0x7f800000) >> 23
+    c. u & 0x007fffff
+    d. exp == 0
+    e. exp == 255
+    f. frac != 0
+    g. shift = 23 - (exp - 127);
+
+
+
+Question 2:
+
+  Given the assembly for the function mystery1(), fill in the corresponding
+  function in C.
+
+    int mystery1(int A[], int n)
+    {
+      int i;
+
+      int mystery = 0;
+
+      for (i=0; i<n; i++)
+      {
+        mystery += A[i];
+      }
+
+      return mystery;
+    }
+
+  
+  A. What would the following function call return?
+     
+        x = 2 
+
+  B. What is the mystery2 function computing?
+
+        Greatest Common Denominator (GCD)
+
+
+
+Question 3:
+
+   Part I:
+                          (0x804961c/0x37)
+                           /            \
+               (0x8049604/0x1f)     (0x8049628/0x3c)
+                 /           \                  \
+         (0x80495f8/0xc) (0x8049610/0x22)     (0x8049634/0x4e)
+
+   Part II:
+
+       <Address>   <Value>
+       0xbffff800   0x4e
+       0xbffff7fc   0x804961c
+       0xbffff7f8   rtn_addr
+       0xbffff7f4   0xbffff880
+       0xbffff7f0   0x4e
+       0xbffff7ec   0x8049628
+       0xbffff7e8   rtn_addr
+       0xbffff7e4   0xbffff7f4
+       0xbffff7e0   0x4e
+       0xbffff7dc   0x8049634
+       0xbffff7d8   rtn_addr
+       0xbffff7d4   0xbffff7e4
+
+
+
+Question 4: 
+
+  A. 1/12
+  B. 1/6
+  C. 1/3
+  D. 1/6
+
+
+
+Question 5:
+
+  1. VPO - [8:0]    TLBI - [9]
+     VPN - [17:9]   TLBT - [17:10]
+
+  2. PPO - [8:0]    CO   - [1:0]   CT - [11:4]
+     PPN - [11:9]   CI   - [3:2]
+
+  A. 01 1010 1001 1111 0100
+
+  B. VPN         - 0xD4
+     TLBI        - 0
+     TLBT        - 0x6A
+     TLB Hit?    - Y
+     Page Fault? - N
+     PPN         - 0x3
+
+  C. 0111 1111 0100
+
+  D. BO          - 0
+     CI          - 1
+     CT          - 0x7F
+     Cache Hit?  - Y
+     Byte        - 0xFF
+
+
+
+Question 6:
+
+  Part 1:
+    A. 127 B / 2048 B
+    B. internal fragmentation is the space wasted because the request
+       is smaller than the payload.  external fragmentation is the space
+       wasted because the unallocated sections of the heap are not
+       contiguous, and thus some allocation requests cannot be fulfilled
+
+  Part 2:
+    A. O(N-M)
+    B. O(N)
+    C. O(N-M)
+
+  Part 3:
+    A. O(1)
+    B. O(N-M)
+    C. lazy
+    D. immediate
+    E. lazy or doesn't matter
+
+
+
+Question 7:
+
+  Part 1:
+
+    Boxes 1,2 and 4 checked.
+
+  Part 2:
+
+    #include <stdio.h>
+    #include <pthread.h>
+
+    #define NTHREADS 20
+
+    pthread_mutex mutex;    <============================ Add this
+
+
+    void *thread(void *vargp)
+    {
+
+      static int cnt = 0;
+
+      pthread_mutex_lock(&mutex); <====================== Add this
+
+      cnt++;
+
+      printf("%d\n", cnt);
+
+      pthread_mutex_unlock(&mutex); <===================== Add this
+    }
+
+    int main ()
+    {
+      int i;
+
+      pthread_t tid;
+
+      pthread_mutex_init(&mutex, NULL); <================= Add this
+
+      for(i = 0; i < NTHREADS; i++)
+      {
+
+        pthread_create(&tid, NULL, thread, NULL);
+      }
+
+      pthread_exit(NULL);
+
+      pthread_mutex_destroy(&mutex); <==================== Optional
+    }
+
+
+
+Question 8:
+
+
+     Descriptor tables         Open file table       V-node table
+     -----------------         ---------------       ------------
+
+      parent:                     
+        fd0          /----------> File pos
+        fd1         /             refcnt = 1
+        fd2-----\  /
+        fd3----\ \/ 
+        ...     \/\          
+                /\ \    /-------->File pos
+      child:   /  \ \  /          refcnt = 1
+        fd0   /    \ \/
+        fd   /      \/\
+        fd2-/       /\_\=========>File pos
+        fd3--------/              refcnt = 1
+        ...
+
+
+
+Question 9:
+
+  Part 1:
+
+    A. fd = socket(AF_INET, SOCK_STREAM, 0); 
+       sin_port = htons(DEFAULT_PORT);
+       s_addr   = htonl(INADDR_ANY);
+       bind(fd, &addr, len);
+       listen(fd, 10);
+       return fd;
+
+     B. fd = socket(AF_INET, SOCK_STREAM, 0);
+        sin_port = htons(DEFAULT_PORT);
+        s_addr   = 0x0100007F;  /* 127.0.0.1 in opposite endianness */
+        connect(fd, &addr, len);
+        return fd;
+
+
+  Part 2:
+
+       Client       Server
+       -------------------
+       1. socket
+       2.           socket
+       3.           bind
+       4.           listen
+       5.           accept
+       6. connect
+
+
+       There are many others, but it must follow these rules:
+
+         * The server must call socket, bind, listen, accept in that order
+         * Connect must happen after accept, otherwise connect could possibly
+           timeout before being accept()ed.
+
+
+
+Question 10:
+
+  FD_SET (fd_list[j], &read_set);
+  select (max_fd, &ready_set, NULL, NULL, NULL);
+  FD_ISSET (fd_list[j], &ready_set);
